@@ -1,0 +1,72 @@
+2023-07-08 10:51:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CLIENT" not found; SQL statement:
+INSERT INTO client (name)
+VALUES
+    ('Company'),
+    ('Corporation'),
+    ('Industries'),
+    ('AcmeCorporation'),
+    ('SmithCo');
+
+
+INSERT INTO project (client_id, start_date, finish_date)
+VALUES
+    (1, '2022-01-01', '2022-04-30'),
+    (2, '2022-02-15', '2022-07-31'),
+    (3, '2022-03-10', '2022-05-31'),
+    (4, '2022-04-20', '2022-06-30'),
+    (5, '2022-05-01', '2022-09-30'),
+    (1, '2022-06-15', '2022-08-31'),
+    (2, '2022-07-10', '2022-09-30'),
+    (3, '2022-08-20', '2022-12-31'),
+    (4, '2022-09-01', '2023-02-28'),
+    (5, '2022-10-15', '2023-01-31');
+
+
+INSERT INTO project_worker (PROJECT_ID, WORKER_ID)
+VALUES
+    (1, 1),
+    (1, 2),
+    (2, 3),
+    (2, 4),
+    (2, 5),
+    (3, 6),
+    (3, 7),
+    (3, 8),
+    (4, 9),
+    (5, 10),
+    (6, 1),
+    (6, 2),
+    (6, 3),
+    (7, 4),
+    (8, 5),
+    (8, 6),
+    (8, 7),
+    (8, 8),
+    (9, 9),
+    (9, 10),
+    (10, 1),
+    (10, 2),
+    (10, 3),
+    (10, 4),
+    (10, 5); [42102-220]
+2023-07-08 10:52:53 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "AcmeCorporation" [22018-220]
+2023-07-08 11:41:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Cannot parse "DATE" constant "Olivia Wilson" [22007-220]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:518)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.value.ValueDate.parse(ValueDate.java:53)
+	at org.h2.value.Value.convertToDate(Value.java:1875)
+	at org.h2.util.LegacyDateTimeUtils.toDate(LegacyDateTimeUtils.java:162)
+	at org.h2.jdbc.JdbcResultSet.getDate(JdbcResultSet.java:478)
+	at org.study.DatabaseQueryService.getYoungerAndEldestWorkers(DatabaseQueryService.java:87)
+	at org.study.Main.main(Main.java:12)
+Caused by: java.lang.NumberFormatException: For input string: "Olivia Wi"
+	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+	at java.base/java.lang.Integer.parseInt(Integer.java:652)
+	at java.base/java.lang.Integer.parseInt(Integer.java:770)
+	at org.h2.util.DateTimeUtils.parseDateValue(DateTimeUtils.java:190)
+	at org.h2.value.ValueDate.parse(ValueDate.java:51)
+	... 5 more
